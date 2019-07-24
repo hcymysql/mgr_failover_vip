@@ -1,6 +1,10 @@
 # mgr_failover_vip
 MySQL 8.0 MGR（组复制）高可用VIP切换脚本
 
+ * 环境准备:
+ 
+ * shell> yum install -y php-process php php-mysql
+
  * MGR（组复制）高可用VIP切换脚本
  * https://github.com/hcymysql/mgr_failover_vip
  *
