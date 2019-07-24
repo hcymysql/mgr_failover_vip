@@ -20,13 +20,17 @@ Usage:
   --help	帮助
 
 Example :
+
    前台运行
+   
    shell> php mgr_master_ip_failover.php --conf=mgr_configure1.php
 
    后台运行
+   
    shell> nohup /usr/bin/php mgr_master_ip_failover.php --conf=mgr_configure1.php -I 5 --daemon 1 > /dev/null 2>&1  &
    	   
    关闭后台运行
+   
    shell> php mgr_master_ip_failover.php --daemon 0
    
    
