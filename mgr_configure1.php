@@ -12,8 +12,8 @@ $vip='192.168.148.43';
 $network_name='em2';
 
 //mgr hostname
-$hostname=array("nirvana_split1"=>"192.168.148.41",
-                "nirvana_split2"=>"192.168.148.42",
-                "DB-MHA"=>"192.168.148.39");
+$hostname=array("mgr1"=>"192.168.148.41",
+                "mgr2"=>"192.168.148.42",
+                "mgr3"=>"192.168.148.39");
 
 ?>
