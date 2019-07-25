@@ -108,6 +108,7 @@ require_once('mgr_Check_primary_class.php');
                 file_put_contents(dirname(__FILE__)."/".strstr($filename,'.',true)."_master_status.health", date('Y-m-d H:i:s')."\n\n"."检测到VIP: ${vip}不存在"."\n\n"
 ."退出主程序"."\n\n", FILE_APPEND);                echo "检测到VIP: ${vip}不存在!".PHP_EOL.PHP_EOL;
                 echo "退出主程序".PHP_EOL.PHP_EOL;
+		unlink(strstr($filename,'.',true).".pid");
                 exit;
         }
         //---------------------------------------------------
