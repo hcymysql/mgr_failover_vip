@@ -5,7 +5,7 @@ MySQL 8.0 MGR（组复制）高可用VIP切换脚本
 
 1）脚本会自动设置当前Primary和备选Primary参数group_replication_member_weight值为100（权重100，默认为50的Secondary不进行vip切换）
 
-2) 脚本会自动设置当前Primary和备选Primary参数group_replication_consistency值为BEFORE_ON_PRIMARY_FAILOVER（意思为当Primary挂了的时候，备选Primary只有把事务全部执行完毕，才提供客户端读写操作）
+2）脚本会自动设置当前Primary和备选Primary参数group_replication_consistency值为BEFORE_ON_PRIMARY_FAILOVER（意思为当Primary挂了的时候，备选Primary只有把事务全部执行完毕，才提供客户端读写操作）
 
 3）最好生产关闭限流模式set global group_replication_flow_control_mode = 'DISABLED'，以防止高并发期间自动触发限流，造成主库不可写，引起生产事故。
 
