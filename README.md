@@ -53,7 +53,7 @@ Example :
    	   
    关闭后台运行
    
-   shell> php mgr_master_ip_failover.php --daemon 0
+   shell> php mgr_master_ip_failover.php --conf=mgr_configure1.php --daemon 0
    
    
 mgr_configure1.php为配置文件，你可以配置多个监控配置文件，监控多套MGR环境。
