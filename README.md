@@ -3,6 +3,13 @@ MySQL 8.0 MGR（组复制）高可用VIP切换脚本
 
 简介：MGR（组复制）官方推荐用MySQL router中间件去做MGR高可用故障转移，但其多过了一层网络，性能会下降，并且需要额外维护一套中间件，运维成本过高，于是写了一个类似MHA的master_ip_failover脚本，实现VIP切换。
 
+1）脚本会自动设置当前Primary和备选Primary参数group_replication_member_weight值为100（权重100，默认为50的Secondary不进行vip切换）
+
+2) 脚本会自动设置当前Primary和备选Primary参数group_replication_consistency值为BEFORE_ON_PRIMARY_FAILOVER（意思为当Primary挂了的时候，备选Primary只有把事务全部执行完毕，才提供客户端读写操作）
+
+3）最好生产关闭限流模式set global group_replication_flow_control_mode = 'DISABLED'，以防止高并发期间自动触发限流，造成主库不可写，引起生产事故。
+
+
  * 环境准备:
  
  * shell> yum install -y php-process php php-mysql
@@ -49,3 +56,27 @@ Example :
    shell> php mgr_master_ip_failover.php --daemon 0
    
    
+mgr_configure1.php为配置文件，你可以配置多个监控配置文件，监控多套MGR环境。
+<?php
+//mgr Remote Primary connection information
+$primary_ip='192.168.148.41';
+$new_primary_ip='192.168.148.42';
+
+$user='admin';
+$passwd='123456';
+
+$port='3306';
+$new_port='3307';
+
+$ssh_port='60000';
+
+$vip='192.168.148.43';
+
+$network_name='eth0';
+
+//mgr hostname
+$hostname=array("mgr1"=>"192.168.148.41",
+                "mgr2"=>"192.168.148.42",
+                "mgr3"=>"192.168.148.39");
+?>
+
