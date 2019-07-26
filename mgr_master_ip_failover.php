@@ -14,6 +14,7 @@
  *
  * 环境准备: 
  * shell> yum install -y php-process php php-mysql
+ * 开通监控管理机和MGR SSH互信
  *  
  */
 
@@ -105,14 +106,22 @@ require_once('mgr_Check_primary_class.php');
                 file_put_contents(dirname(__FILE__)."/".strstr($filename,'.',true)."_master_status.health", date('Y-m-d H:i:s')."\n\n"."检测到VIP: ${vip}已经存在"."\n\n", FILE_APPEND);                
 		echo "检测到VIP: ${vip}已经存在".PHP_EOL.PHP_EOL;
         } else {
-                file_put_contents(dirname(__FILE__)."/".strstr($filename,'.',true)."_master_status.health", date('Y-m-d H:i:s')."\n\n"."检测到VIP: ${vip}不存在"."\n\n"
-."退出主程序"."\n\n", FILE_APPEND);                echo "检测到VIP: ${vip}不存在!".PHP_EOL.PHP_EOL;
-                echo "退出主程序".PHP_EOL.PHP_EOL;
-		unlink(strstr($filename,'.',true).".pid");
-                exit;
+		system("ping -c 5 {$primary_ip}",$rs_ping);
+		if($rs_ping == 0){
+                	file_put_contents(dirname(__FILE__)."/".strstr($filename,'.',true)."_master_status.health", date('Y-m-d H:i:s')."\n\n"."检测到VIP: ${vip}不存在"."\n\n"."退出主程序"."\n\n", FILE_APPEND);                
+			echo "检测到VIP: ${vip}不存在!".PHP_EOL.PHP_EOL;
+                	echo "退出主程序".PHP_EOL.PHP_EOL;
+			unlink(strstr($filename,'.',true).".pid");
+                	exit;
+		} else {
+			file_put_contents(dirname(__FILE__)."/".strstr($filename,'.',true)."_master_status.health", date('Y-m-d H:i:s')."\n\n"."检测到VIP: ${vip}不存在"."\n\n"."无法ping通Primary IP:$primary_ip"."  即将进行VIP切换...\n\n", FILE_APPEND);
+			echo "\e[38;5;196m检测到VIP: ${vip}不存在! 无法ping通Primary IP:$primary_ip"."  即将进行VIP切换...".PHP_EOL.PHP_EOL;
+			goto Failover_Vip;
+		}
         }
         //---------------------------------------------------
-
+	
+	Failover_Vip:
         $check_primary = new Check_primary($primary_ip,$new_primary_ip,$user,$passwd,$port,$new_port,$hostname,0);
         $r_status = $check_primary->check_primary();
 
