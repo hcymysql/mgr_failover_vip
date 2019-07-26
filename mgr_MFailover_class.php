@@ -24,6 +24,7 @@ class MFailover {
 		if($res == 0){
 			file_put_contents(dirname(__FILE__)."/".strstr($GLOBALS['filename'],'.',true)."_master_status.health", date('Y-m-d H:i:s')."\n\n"."VIP: {$this->vip}已经切换成功"."\n\n", FILE_APPEND);
                         echo "VIP: {$this->vip}已经切换成功".PHP_EOL.PHP_EOL;
+			exit;
                 } else {
 			file_put_contents(dirname(__FILE__)."/".strstr($GLOBALS['filename'],'.',true)."_master_status.health", date('Y-m-d H:i:s')."\n\n"."VIP: {$this->vip}切换失败，退出主程序!"."\n\n", FILE_APPEND);
                         echo "VIP: {$this->vip}切换失败，退出主程序!".PHP_EOL.PHP_EOL;
