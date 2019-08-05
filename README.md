@@ -13,10 +13,10 @@ MySQL 8.0 MGR（组复制）高可用VIP切换脚本
  * 环境准备:
  
  * shell> yum install -y php-process php php-mysql
- * 开通监控管理机和MGR SSH互信
+ * 开通监控管理机和MGR SSH互信（可用MHA的masterha_check_ssh脚本做检测）
 
 
- * MGR（组复制）高可用VIP切换脚本（可用MHA的masterha_check_ssh脚本做检测）
+ * MGR（组复制）高可用VIP切换脚本
  * https://github.com/hcymysql/mgr_failover_vip
  *
  * 运行条件:
