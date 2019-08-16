@@ -25,7 +25,7 @@ MySQL 8.0 MGR（组复制）高可用VIP切换脚本
  * 2、single-primary mode（单主模式）
  * 3、Native Password Authentication（5.5/5.6/5.7传统用户认证模式）
  * 例：
-      > CREATE USER 'hechunyang'@'%' IDENTIFIED WITH mysql_native_password BY '159753';
+      > CREATE USER 'hechunyang'@'%' IDENTIFIED WITH mysql_native_password BY '123456';
       
       > GRANT ALL ON *.* TO 'hechunyang'@'%' WITH GRANT OPTION;
 
