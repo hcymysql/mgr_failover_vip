@@ -125,7 +125,7 @@ require_once('mgr_Check_primary_class.php');
         $check_primary = new Check_primary($primary_ip,$new_primary_ip,$user,$passwd,$port,$new_port,$hostname,0);
         $r_status = $check_primary->check_primary();
 
-        //检测失败切换VIP,0代表切换，1代表不切
+        //检测失败切换VIP, $r_status值等于0代表切换，1代表不切
         if ($r_status == 0){
                 $check_new_primary = new Check_primary($primary_ip,$new_primary_ip,$user,$passwd,$port,$new_port,$hostname,1);
                 $r_new_status = $check_new_primary->check_primary();
