@@ -53,12 +53,12 @@ class Check_primary {
 					} else {
 						file_put_contents(dirname(__FILE__)."/".strstr($GLOBALS['filename'],'.',true)."_master_status.health", date('Y-m-d H:i:s')."\n\n数据延迟 ".$row2[0]." 个事务，不能切换VIP"."\n\n", FILE_APPEND);
 						echo "\e[38;5;196m数据延迟 ".$row2[0]." 个事务，不能切换VIP".PHP_EOL;
-						return $c=1;
+						exit();
 					}
 				} else {
 					file_put_contents(dirname(__FILE__)."/".strstr($GLOBALS['filename'],'.',true)."_master_status.health", date('Y-m-d H:i:s')."\n\n"."检测到主节点{$this->primary_ip}当前已经不是Primary状态, 即将进行切换VIP...."."\n\n", FILE_APPEND);
                                 	echo "\e[38;5;196m检测到主节点{$this->primary_ip}当前已经不是Primary状态, 即将进行切换VIP...".PHP_EOL.PHP_EOL;
-					return $c=0;
+					return $c=1;
                                 }
 			} else {
 				file_put_contents(dirname(__FILE__)."/".strstr($GLOBALS['filename'],'.',true)."_master_status.health", date('Y-m-d H:i:s')."\n\n"."检测到主节点{$this->primary_ip}当前已经不是Primary状态, 即将进行切换VIP...."."\n\n", FILE_APPEND);
