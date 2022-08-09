@@ -43,8 +43,8 @@ class Check_primary {
 					//判断有无延迟事务
 					mysqli_query($con,"set global group_replication_member_weight = 100");
 					mysqli_query($con,"set global group_replication_consistency = 'BEFORE_ON_PRIMARY_FAILOVER'");
-					$get_queue_count = "SELECT COUNT_TRANSACTIONS_REMOTE_IN_APPLIER_QUEUE FROM performance_schema.replication_group_member_stats WHERE MEMBER_ID IN (SELECT MEMBER_ID FROM performance_schema.replication_group_members WHERE MEMBER_ROLE = 'PRIMARY' AND MEMBER_STATE = 'ONLINE')";
-					$result2 = mysqli_query($con,$get_primary_info);
+					$get_queue_count = "SELECT COUNT_TRANSACTIONS_REMOTE_IN_APPLIER_QUEUE FROM performance_schema.replication_group_member_stats WHERE MEMBER_ID IN (SELECT MEMBER_ID FROM performance_schema.replication_group_members WHERE MEMBER_ROLE = 'SECONDARY' AND MEMBER_STATE = 'ONLINE')";
+					$result2 = mysqli_query($con,$get_queue_count);
 					$row2 = mysqli_fetch_array($result2);
 					if ($row2[0] == 0){
 						file_put_contents(dirname(__FILE__)."/".strstr($GLOBALS['filename'],'.',true)."_master_status.health", date('Y-m-d H:i:s')."\n\n无数据延迟"."\n\n", FILE_APPEND);
