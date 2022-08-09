@@ -16,10 +16,10 @@ class MFailover {
         }       
         
         function execCommand(){
-                $del_vip="sudo /usr/bin/ssh -p $this->ssh_port root@$this->primary_ip -C '/sbin/ip addr del {$this->vip}/32 dev $this->network_name'";
+                $del_vip="sudo /usr/bin/ssh -p $this->ssh_port root@$this->primary_ip -C '/usr/sbin/ip addr del {$this->vip}/32 dev $this->network_name'";
 		system("$del_vip");
                 sleep(1);  
-                $add_vip="sudo /usr/bin/ssh -p $this->ssh_port root@$this->new_primary_ip -C '/sbin/ip addr add {$this->vip}/32 dev $this->network_name;/sbin/arping -q -c 2 -U -I $this->network_name $this->vip'";
+                $add_vip="sudo /usr/bin/ssh -p $this->ssh_port root@$this->new_primary_ip -C '/usr/sbin/ip addr add {$this->vip}/32 dev $this->network_name;/sbin/arping -q -c 2 -U -I $this->network_name $this->vip'";
 		system("$add_vip",$res);                
 		if($res == 0){
 			file_put_contents(dirname(__FILE__)."/".strstr($GLOBALS['filename'],'.',true)."_master_status.health", date('Y-m-d H:i:s')."\n\n"."VIP: {$this->vip}已经切换成功"."\n\n", FILE_APPEND);
