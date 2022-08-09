@@ -68,7 +68,7 @@ class Check_primary {
 		} else{
 			file_put_contents(dirname(__FILE__)."/".strstr($GLOBALS['filename'],'.',true)."_master_status.health", date('Y-m-d H:i:s')."\n\n"."检测到主主节点{$this->primary_ip}已经无法连接, 即将进行切换VIP..."."\n\n", FILE_APPEND);
 			echo "\e[38;5;196m检测到主节点{$this->primary_ip}已经无法连接, 即将进行切换VIP...".PHP_EOL.PHP_EOL;
-			return $c=1;
+			return $c=0;
 		}
 
 	}	
