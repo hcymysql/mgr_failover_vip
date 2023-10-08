@@ -13,7 +13,7 @@ MySQL 8.0 MGR（组复制）高可用VIP切换脚本
  * 环境准备:
  
  * shell> yum install -y php-process php php-mysql
- * 开通监控管理机和MGR SSH互信（可用MHA的masterha_check_ssh脚本做检测）
+ * 开通监控管理机和MGR SSH互信（可用SSH主机批量互信认证脚本https://github.com/hcymysql/batch_sshkey）
 
  * 手工添加VIP地址
  * shell> ip addr add 192.168.148.100/32 dev eth0 ; arping -q -c 2 -U -I eth0 192.168.148.100
