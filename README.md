@@ -12,17 +12,13 @@ MySQL 8.0 MGR（组复制）高可用VIP切换脚本
 
  * 环境准备:
  
- * shell> yum install -y php-process php php-mysql
- * 开通监控管理机和MGR SSH互信（可用SSH主机批量互信认证脚本https://github.com/hcymysql/batch_sshkey）
+ 1) ```shell> yum install -y php-process php php-mysql```
+ 2) 开通监控管理机和MGR SSH互信（可用SSH主机批量互信认证脚本https://github.com/hcymysql/batch_sshkey）
 
- * 手工添加VIP地址
- * shell> ip addr add 192.168.148.100/32 dev eth0 ; arping -q -c 2 -U -I eth0 192.168.148.100
+ 3) 手工添加VIP地址
+```shell> ip addr add 192.168.148.100/32 dev eth0 ; arping -q -c 2 -U -I eth0 192.168.148.100```
  
- * MGR（组复制）高可用VIP切换脚本
- * https://github.com/hcymysql/mgr_failover_vip
- *
  * 运行条件:
- * Modified by: hcymysql 2019/07/24
  * 1、MySQL 8.0版本
  * 2、single-primary mode（单主模式）
  * 3、Native Password Authentication（5.5/5.6/5.7传统用户认证模式）
@@ -47,15 +43,15 @@ Example :
 
    前台运行
    
-   shell> php mgr_master_ip_failover.php --conf=mgr_configure1.php
+   ```shell> php mgr_master_ip_failover.php --conf=mgr_configure1.php```
 
    后台运行
    
-   shell> nohup /usr/bin/php mgr_master_ip_failover.php --conf=mgr_configure1.php -I 5 --daemon 1 > /dev/null 2>&1  &
+   ```shell> nohup /usr/bin/php mgr_master_ip_failover.php --conf=mgr_configure1.php -I 5 --daemon 1 > /dev/null 2>&1  &```
    	   
    关闭后台运行
    
-   shell> php mgr_master_ip_failover.php --conf=mgr_configure1.php --daemon 0
+   ```shell> php mgr_master_ip_failover.php --conf=mgr_configure1.php --daemon 0```
    
    
 mgr_configure1.php为配置文件，你可以配置多个监控配置文件，监控多套MGR环境。
