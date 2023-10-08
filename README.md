@@ -1,5 +1,5 @@
 # mgr_failover_vip
-MySQL 8.0 MGR（组复制）高可用VIP切换脚本
+MySQL 8.0 MGR（组复制）高可用VIP故障转移脚本
 
 简介：MGR（组复制）官方推荐用MySQL router中间件去做MGR高可用故障转移，但其多过了一层网络，性能会下降，并且需要额外维护一套中间件，运维成本过高，于是写了一个类似MHA的master_ip_failover脚本，实现VIP切换。
 
